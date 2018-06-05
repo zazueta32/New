@@ -1,0 +1,57 @@
+import java.net.*;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.SocketException;
+ 
+public class ServidorUDP
+        {
+	public static void main(String[] args) 
+          {
+    	try 
+    	{
+    		DatagramSocket miSocket = new DatagramSocket(9108);
+    		byte[]buffer = new byte[1024];
+    		while(true)
+    		{
+    			
+    		DatagramPacket peticion = new DatagramPacket(buffer, buffer.length);	
+				miSocket.receive(peticion);
+				System.out.println("Ip: "+ peticion.getAddress());
+				System.out.println("Puerto: "+peticion.getPort());
+				//System.out.println("Mensaje: "+new String(peticion.getData(),0, peticion.getLength()));
+				int sumValue = Integer.parseInt(new String(peticion.getData(),0, peticion.getLength()));
+				System.out.println("Sumatoria de "+sumValue+" es " +Sumatoria(sumValue));
+				
+			}
+    		}
+    	catch (SocketException e) 
+    	{
+    		e.printStackTrace();
+		}
+    		catch (IOException e)
+    		{
+			e.printStackTrace();	
+			}
+	
+		
+	    }
+
+	private static int Sumatoria(int n)
+	{
+       int suma = 0;
+		
+		for (int i = 1; i<=n; i++ ) 
+        {
+			
+			suma = suma + i;
+			
+		}
+		
+		return suma;
+		
+	
+	}
+    	}
+	
