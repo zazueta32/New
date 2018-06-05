@@ -1,0 +1,55 @@
+import java.net.DatagramSocket;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.io.IOException;
+import java.net.DatagramPacket;
+//import java.net.InetAdress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.Scanner;
+//import javax.swing.JOptionPane;
+
+public class ClienteUDP 
+{
+
+	public static void main(String[] args)
+	{
+		
+		Scanner teclado = new Scanner(System.in);
+		
+		
+		
+		//String msn = JOptionPane.showInputDialog("Ingrese el mensaje a enviar: ");
+		try 
+		{
+			while(true)
+			{
+				System.out.println("Ingrese un numero ");
+			     String msn = teclado.nextLine();
+				
+			 DatagramSocket miSocket= new DatagramSocket();
+			 byte[]mensaje = msn.getBytes();
+			InetAddress host = InetAddress.getByName("127.0.0.1");
+			 int puerto = 9108;
+			 DatagramPacket miPaquete= new DatagramPacket(mensaje, msn.length(),host, puerto);
+			 miSocket.send(miPaquete);
+			 
+		
+			}
+		} 
+		catch (SocketException e) 
+		{
+		e.printStackTrace();
+		}
+		catch (UnknownHostException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+  
+	}
+
+}
